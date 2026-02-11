@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../Firebase_Services/splash_services.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,9 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           Center(
             child: Text(
-              "Splash Screen",
-              style: TextStyle(
-                fontSize: 20,
+              "Firebase Learning",
+              style: GoogleFonts.oswald(
+                fontSize: 30,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
