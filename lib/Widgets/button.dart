@@ -11,7 +11,7 @@ class Button extends StatelessWidget {
       body: InkWell(
         onTap: onPressed,
         child: Container(
-          height: 50,
+          height: 2,
           decoration: BoxDecoration(
             color: Colors.purpleAccent.shade700,
             borderRadius: BorderRadius.circular(10),
