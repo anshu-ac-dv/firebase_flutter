@@ -7,18 +7,15 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: InkWell(
-        onTap: onPressed,
-        child: Container(
-          height: 2,
-          decoration: BoxDecoration(
-            color: Colors.purpleAccent.shade700,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Center(
-            child: Text(title, style: TextStyle(color: Colors.white, fontSize: 20)),
-          ),
+    return InkWell(
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.purpleAccent.shade700,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Center(
+          child: Text(title, style: TextStyle(color: Colors.white)),
         ),
       ),
     );

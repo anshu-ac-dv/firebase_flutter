@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: Text("Please Login to get more benefits."),
+                child: Text("Please login to get more benefits."),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20, top: 40),
@@ -46,6 +46,8 @@ class _LoginScreenState extends State<LoginScreen> {
               Form(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(
@@ -109,7 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-              Button(title: "Login", onPressed: () {}),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Button(title: "Login", onPressed: () {}),
+              ),
             ],
           ),
         ),
