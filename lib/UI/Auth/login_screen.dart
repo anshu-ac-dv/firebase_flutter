@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/UI/Auth/sign_up.dart';
 import 'package:flutter_firebase/Widgets/button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,18 +11,27 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(left: 20, top: 40),
                 child: Text(
@@ -32,8 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
+              const Padding(
+                padding: EdgeInsets.only(left: 20),
                 child: Text("Please login to get more benefits."),
               ),
               Padding(
@@ -44,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               Form(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
+                key: _formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,11 +65,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         left: 20,
                         right: 20,
                       ),
-                      child: TextField(
+                      child: TextFormField(
                         controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           hintText: "Email",
-                          prefixIcon: Icon(Icons.email),
+                          prefixIcon: const Icon(Icons.email),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -76,6 +87,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your email";
+                          }
+                          return null;
+                        },
                       ),
                     ),
                     Padding(
@@ -84,12 +101,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         left: 20,
                         right: 20,
                       ),
-                      child: TextField(
+                      child: TextFormField(
                         controller: passwordController,
+                        obscureText: true,
                         decoration: InputDecoration(
-                          suffixIcon: Icon(Icons.remove_red_eye),
+                          suffixIcon: const Icon(Icons.remove_red_eye),
                           hintText: "Password",
-                          prefixIcon: Icon(Icons.password_rounded),
+                          prefixIcon: const Icon(Icons.password_rounded),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -106,15 +124,41 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter your password";
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 40),
               Padding(
                 padding: const EdgeInsets.all(20),
-                child: Button(title: "Login", onPressed: () {}),
+                child: Button(
+                  title: "Login",
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {}
+                  },
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Don't have an account?"),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        (context),
+                        MaterialPageRoute(builder: (context) => SignUp()),
+                      );
+                    },
+                    child: const Text("Sign Up"),
+                  ),
+                ],
               ),
             ],
           ),
