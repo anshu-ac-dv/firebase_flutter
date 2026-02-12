@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Button extends StatelessWidget {
   final String title;
@@ -12,10 +13,13 @@ class Button extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
           color: Colors.purpleAccent.shade700,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(20),
         ),
         child: Center(
-          child: Text(title, style: TextStyle(color: Colors.white)),
+          child: Text(
+            title,
+            style: GoogleFonts.oswald(color: Colors.white, fontSize: 20),
+          ),
         ),
       ),
     );

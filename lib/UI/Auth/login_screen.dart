@@ -111,6 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Button(title: "Login", onPressed: () {}),
