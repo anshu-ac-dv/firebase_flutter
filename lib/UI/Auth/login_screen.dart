@@ -56,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
               child: TextField(
                 decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.remove_red_eye),
                   hintText: "Password",
                   prefixIcon: Icon(Icons.password_rounded),
                   border: OutlineInputBorder(
@@ -72,8 +73,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20,),
             Button(title: "Login", onPressed: () {},),
+            SizedBox(height: 20),
+            Button(title: "Register", onPressed: () {},),
           ],
         ),
       ),
