@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/UI/Auth/login_screen.dart';
+import 'package:flutter_firebase/UI/Auth/welcome.dart';
 import 'package:flutter_firebase/Widgets/button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,6 +44,11 @@ class _SignUpState extends State<SignUp> {
             setState(() {
               loading = false;
             });
+            Errortoast().SuccessToast("Register Successfully");
+            Navigator.push(
+              (context),
+              MaterialPageRoute(builder: (context) => Welcome()),
+            );
           })
           .onError((error, stackTrace) {
             Errortoast().showToast(error.toString());
@@ -150,6 +156,7 @@ class _SignUpState extends State<SignUp> {
               loading: loading,
               title: "Register Now",
               onPressed: () {
+                loading = loading;
                 if (_formKey.currentState!.validate()) {
                   register();
                 }
