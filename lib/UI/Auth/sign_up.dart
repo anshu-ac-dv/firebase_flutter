@@ -30,7 +30,7 @@ class _SignUpState extends State<SignUp> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 80),
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 40),
             child: Text(
