@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/UI/Auth/login_screen.dart';
 import 'package:flutter_firebase/Widgets/button.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_firebase/Utilits/errorToast.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -13,16 +15,41 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
+    bool loading = false;
     final _formKey = GlobalKey<FormState>();
     final nameController = TextEditingController();
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
+
+    FirebaseAuth auth = FirebaseAuth.instance;
 
     void dispose() {
       nameController.dispose();
       emailController.dispose();
       passwordController.dispose();
       super.dispose();
+    }
+
+    void register() {
+      setState(() {
+        loading = true;
+      });
+      auth
+          .createUserWithEmailAndPassword(
+            email: emailController.text.toString(),
+            password: passwordController.text.toString(),
+          )
+          .then((onValue) {
+            setState(() {
+              loading = false;
+            });
+          })
+          .onError((error, stackTrace) {
+            Errortoast().showToast(error.toString());
+            setState(() {
+              loading = false;
+            });
+          });
     }
 
     return Scaffold(
@@ -120,9 +147,12 @@ class _SignUpState extends State<SignUp> {
           Padding(
             padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
             child: Button(
+              loading: loading,
               title: "Register Now",
               onPressed: () {
-                if (_formKey.currentState!.validate()) {}
+                if (_formKey.currentState!.validate()) {
+                  register();
+                }
               },
             ),
           ),

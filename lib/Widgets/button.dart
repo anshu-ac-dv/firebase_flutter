@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Button extends StatelessWidget {
+  final bool loading;
   final String title;
   final VoidCallback onPressed;
-  const Button({super.key, required this.title, required this.onPressed});
+  const Button({
+    super.key,
+    required this.title,
+    required this.onPressed,
+    this.loading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +23,15 @@ class Button extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Center(
-          child: Text(
-            title,
-            style: GoogleFonts.oswald(color: Colors.white, fontSize: 20),
-          ),
+          child: loading
+              ? CircularProgressIndicator(
+                  strokeWidth: 3,
+                  color: Colors.purpleAccent.shade700,
+                )
+              : Text(
+                  title,
+                  style: GoogleFonts.oswald(color: Colors.white, fontSize: 20),
+                ),
         ),
       ),
     );
