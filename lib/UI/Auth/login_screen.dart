@@ -14,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool loading = false;
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -21,12 +22,19 @@ class _LoginScreenState extends State<LoginScreen> {
   final auth = FirebaseAuth.instance;
 
   void login() {
+    setState(() {
+      loading = true;
+    });
     auth
         .signInWithEmailAndPassword(
           email: emailController.text.toString(),
           password: passwordController.text.toString(),
         )
         .then((value) {
+          setState(() {
+            loading = false;
+          });
+          Errortoast().SuccessToast("Login Successfully");
           Navigator.push(
             (context),
             MaterialPageRoute(builder: (context) => Welcome()),
@@ -35,6 +43,9 @@ class _LoginScreenState extends State<LoginScreen> {
         .onError((error, stackTrace) {
           debugPrint(error.toString());
           Errortoast().showToast(error.toString());
+          setState(() {
+            loading = false;
+          });
         });
   }
 
@@ -164,6 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Button(
                   title: "Login",
                   onPressed: () {
+                    loading = loading;
                     if (_formKey.currentState!.validate()) {
                       login();
                     }
