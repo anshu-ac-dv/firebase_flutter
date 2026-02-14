@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/UI/Auth/login_screen.dart';
+import 'package:flutter_firebase/Utilits/errorToast.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({super.key});
@@ -8,6 +11,7 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +21,22 @@ class _WelcomeState extends State<Welcome> {
         backgroundColor: Colors.purpleAccent.shade700,
         foregroundColor: Colors.white,
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.logout))
+          IconButton(
+            onPressed: () {
+              auth
+                  .signOut()
+                  .then((value) {
+                    Navigator.push(
+                      (context),
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                    );
+                  })
+                  .onError((error, stackTrace) {
+                    Errortoast().showToast(error.toString());
+                  });
+            },
+            icon: Icon(Icons.logout),
+          ),
         ],
       ),
     );
