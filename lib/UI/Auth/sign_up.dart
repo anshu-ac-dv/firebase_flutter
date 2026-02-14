@@ -18,14 +18,12 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     bool loading = false;
     final _formKey = GlobalKey<FormState>();
-    final nameController = TextEditingController();
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
 
     FirebaseAuth auth = FirebaseAuth.instance;
 
     void dispose() {
-      nameController.dispose();
       emailController.dispose();
       passwordController.dispose();
       super.dispose();
@@ -89,25 +87,6 @@ class _SignUpState extends State<SignUp> {
             key: _formKey,
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: TextFormField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      hintText: "Name",
-                      prefixIcon: const Icon(Icons.drive_file_rename_outline),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter your name";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                   child: TextFormField(
