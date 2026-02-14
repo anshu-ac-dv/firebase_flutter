@@ -198,22 +198,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-              Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.purpleAccent.shade700,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: TextButton(onPressed: (){
-                    Navigator.push(
-                      (context),
-                      MaterialPageRoute(builder: (context) => LoginWithPhone()),
-                    );
-                  }, child: Text("Login With Phone")),
-                ),
-              )
+              // Center(
+              //   child: Container(
+              //     decoration: BoxDecoration(
+              //       border: Border.all(
+              //         color: Colors.purpleAccent.shade700,
+              //       ),
+              //       borderRadius: BorderRadius.circular(20),
+              //     ),
+              //     child: TextButton(onPressed: (){
+              //       Navigator.push(
+              //         (context),
+              //         MaterialPageRoute(builder: (context) => LoginWithPhone()),
+              //       );
+              //     }, child: Text("Login With Phone")),
+              //   ),
+              // )
             ],
           ),
         ),
