@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/UI/Auth/login_screen.dart';
+import 'package:flutter_firebase/UI/add_post.dart';
 import 'package:flutter_firebase/Utilits/errorToast.dart';
 
 class Welcome extends StatefulWidget {
@@ -38,6 +39,15 @@ class _WelcomeState extends State<Welcome> {
             icon: Icon(Icons.logout),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            (context),
+            MaterialPageRoute(builder: (context) => AddPost()),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
