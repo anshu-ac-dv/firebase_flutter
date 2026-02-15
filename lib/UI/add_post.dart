@@ -12,7 +12,7 @@ class AddPost extends StatefulWidget {
 
 class _AddPostState extends State<AddPost> {
   bool loading = false;
-  final databaseRef = FirebaseDatabase.instance.ref('Post');
+  //final databaseRef = FirebaseDatabase.instance.ref('Post');
   final postController = TextEditingController();
 
   @override
@@ -53,24 +53,19 @@ class _AddPostState extends State<AddPost> {
                   loading = true;
                 });
 
-                // Create a unique ID for each post using timestamp
-                String id = DateTime.now().millisecondsSinceEpoch.toString();
+                void addUser() async {
+                  // 1. Get a reference to the "users" node (your "table")
+                  DatabaseReference ref = FirebaseDatabase.instance.ref("Users");
 
-                databaseRef.child(id).set({
-                  'id': id,
-                  'title': postController.text.toString(),
-                }).then((value) {
-                  setState(() {
-                    loading = false;
+                  // 2. Use push() to create a unique key and set data
+                  await ref.push().set({
+                    "name": "Anshu Kumar",
+                    "email": "anshu.ac.dv.com",
+                    "age": 22,
+                    "title": postController,
+                    "createdAt": ServerValue.timestamp, // Server-side timestamp
                   });
-                  postController.clear();
-                  Errortoast().SuccessToast("Post added successfully");
-                }).onError((error, stackTrace) {
-                  setState(() {
-                    loading = false;
-                  });
-                  Errortoast().showToast(error.toString());
-                });
+                }
               },
             ),
           ),
